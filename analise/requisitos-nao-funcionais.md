@@ -4,6 +4,8 @@
 
 Registrar restrições, critérios de qualidade e requisitos de operação do sistema de gestão de eventos, considerando desempenho, segurança, disponibilidade, usabilidade, privacidade e confiabilidade.
 
+**Referências adotadas em DL-09:** OWASP ASVS para segurança da aplicação; Lei Geral de Proteção de Dados (LGPD) e orientações da Autoridade Nacional de Proteção de Dados (ANPD) para privacidade; WCAG 2.2 nível AA como alvo de acessibilidade; ISO/IEC 25010 para organizar atributos de qualidade. ISO/IEC 27001 é referência possível para gestão de segurança, sem compromisso de certificação. PCI DSS depende de o sistema armazenar, processar ou transmitir dados de cartão. Indicadores de nível de serviço (SLI) e objetivos de nível de serviço (SLO) para desempenho e disponibilidade devem ser dimensionados após definir carga e operação esperadas. Os critérios numéricos abaixo são propostas, não metas aprovadas.
+
 ## Requisitos Não Funcionais Identificados
 
 ### RNF-01 - Tempo de resposta da interface
@@ -11,35 +13,35 @@ Registrar restrições, critérios de qualidade e requisitos de operação do si
 - Descrição: A interface do sistema deve responder de forma ágil às ações de navegação, busca, inscrição e consulta de dados, mesmo com aumento no número de usuários.
 - Critério de aceitação: A página inicial e os processos de inscrição devem carregar em até 3 segundos em condições normais de uso, em rede estável.
 - Prioridade: Alta
-- **Observação:** Critério sugestivo porque não foram especificados itens como segurança, tempo de resposta, acessibilidade e proteção de dados.
+- **Observação:** O limite de 3 segundos é uma proposta, não uma meta aprovada. Faltam definir perfil de carga, condições de rede/dispositivo e método de medição conforme DL-09.
 
 ### RNF-02 - Disponibilidade do sistema
 - Nome: Disponibilidade do sistema
 - Descrição: O sistema deve estar disponível para uso durante os períodos de operação do evento, minimizando indisponibilidades por manutenção ou falhas técnicas.
 - Critério de aceitação: O sistema deve atingir disponibilidade de no mínimo 99% em operação normal, com exceção de janelas de manutenção previamente agendadas.
 - Prioridade: Alta
-- **Observação:** Critério sugestivo porque não foram especificados itens como segurança, tempo de resposta, acessibilidade e proteção de dados.
+- **Observação:** O limite de 99% é uma proposta, não uma meta aprovada. Faltam definir janela de medição, períodos de operação cobertos e exclusões conforme DL-09.
 
 ### RNF-03 - Segurança de autenticação e autorização
 - Nome: Segurança de autenticação e autorização
-- Descrição: O sistema deve garantir que apenas usuários autorizados acessem áreas e informações conforme o perfil de cada stakeholder.
-- Critério de aceitação: Usuários sem permissão não devem visualizar nem alterar dados de outros perfis, e a autenticação deve exigir credenciais válidas.
+- Descrição: O sistema deve garantir que apenas usuários autorizados acessem áreas e informações conforme o perfil de cada stakeholder, usando OWASP ASVS como referência para requisitos e verificação da segurança da aplicação.
+- Critério de aceitação: Usuários sem permissão não devem visualizar nem alterar dados de outros perfis, e a autenticação deve exigir credenciais válidas. O nível e o escopo de verificação do ASVS ainda serão definidos conforme risco e dados tratados.
 - Prioridade: Alta
-- **Observação:** Critério sugestivo porque não foram especificados itens como segurança, tempo de resposta, acessibilidade e proteção de dados.
+- **Observação:** OWASP ASVS foi adotado como referência; o nível e o escopo dos controles a verificar continuam pendentes em DL-09.
 
 ### RNF-04 - Proteção de dados pessoais
 - Nome: Proteção de dados pessoais
 - Descrição: Os dados dos participantes devem ser armazenados e processados conforme boas práticas de privacidade, limitando o acesso apenas ao necessário para cada processo.
 - Critério de aceitação: Informações sensíveis devem estar protegidas por controle de acesso e não devem ser exibidas a usuários sem autorização.
 - Prioridade: Alta
-- **Observação:** Critério sugestivo porque não foram especificados itens como segurança, tempo de resposta, acessibilidade e proteção de dados.
+- **Observação:** LGPD e orientações da ANPD são as referências adotadas; retenção, exclusão e controles operacionais de dados ainda precisam ser especificados em DL-09.
 
 ### RNF-05 - Conformidade com privacidade e LGPD
 - Nome: Conformidade com privacidade e LGPD
-- Descrição: O sistema deve respeitar regras de privacidade e proteção de dados, especialmente no armazenamento e uso de informações pessoais de participantes.
+- Descrição: O sistema deve respeitar a LGPD e considerar as orientações da ANPD na definição de finalidade, minimização, acesso, retenção e tratamento de dados pessoais, especialmente dados sensíveis como atestados médicos.
 - Critério de aceitação: O sistema deve permitir consentimento, uso mínimo necessário e controle do titular sobre seus dados, conforme a legislação aplicável.
 - Prioridade: Alta
-- **Observação:** Critério sugestivo porque não foram especificados itens como segurança, tempo de resposta, acessibilidade e proteção de dados.
+- **Observação:** LGPD e orientações da ANPD são as referências adotadas; os mecanismos e evidências de atendimento aos direitos do titular ainda precisam ser especificados em DL-09.
 
 ### RNF-06 - Integridade dos dados de inscrições e pagamentos
 - Nome: Integridade dos dados de inscrições e pagamentos
@@ -68,9 +70,9 @@ Registrar restrições, critérios de qualidade e requisitos de operação do si
 ### RNF-10 - Acessibilidade
 - Nome: Acessibilidade
 - Descrição: A solução deve ser acessível a usuários com diferentes necessidades, incluindo navegação por teclado, contraste adequado, leitura de conteúdo e uso de tecnologias assistivas.
-- Critério de aceitação: A interface deve atender, ao menos em nível básico, diretrizes de acessibilidade web e permitir navegação por leitores de tela e teclado.
+- Critério de aceitação: A interface deve ter como alvo de conformidade WCAG 2.2 nível AA, incluindo navegação por teclado e compatibilidade com tecnologias assistivas; o método de verificação e os testes de aceite devem ser definidos no plano de validação.
 - Prioridade: Média
-- **Observação:** Critério sugestivo porque não foram especificados itens como segurança, tempo de resposta, acessibilidade e proteção de dados.
+- **Observação:** WCAG 2.2 nível AA foi adotado como alvo; plano de testes, ferramentas e evidências de conformidade ainda devem ser definidos em DL-09.
 
 ### RNF-11 - Compatibilidade com navegadores e dispositivos
 - Nome: Compatibilidade com navegadores e dispositivos
@@ -80,7 +82,7 @@ Registrar restrições, critérios de qualidade e requisitos de operação do si
 
 ### RNF-12 - Manutenibilidade
 - Nome: Manutenibilidade do sistema
-- Descrição: O sistema deve ser desenvolvido de forma organizada e modular, permitindo ajustes, correções e evoluções sem grande esforço.
+- Descrição: O sistema deve ser desenvolvido de forma organizada e modular, permitindo ajustes, correções e evoluções sem grande esforço. ISO/IEC 25010 será usada como referência para organizar e discutir atributos de qualidade do produto, não como certificação automática.
 - Critério de aceitação: Mudanças de regra de negócio, como cancelamento, vagas e emissão de certificados, devem ser implementáveis com impacto mínimo em outras áreas.
 - Prioridade: Média
 
@@ -101,7 +103,7 @@ Registrar restrições, critérios de qualidade e requisitos de operação do si
 - Descrição: O sistema deve manter desempenho aceitável durante períodos de alta demanda, como abertura de inscrições ou final de prazo de inscrição.
 - Critério de aceitação: Mesmo com grande volume de acessos simultâneos, o sistema deve continuar a processar inscrições e consultas com tempos aceitáveis.
 - Prioridade: Alta
-- **Observação:** Critério sugestivo porque não foram especificados itens como segurança, tempo de resposta, acessibilidade e proteção de dados.
+- **Observação:** O desempenho em pico deve ser medido por cenários de carga representativos; volume, concorrência, janela e metas ainda precisam ser definidos em DL-09.
 
 ### RNF-16 - Consistência de comunicação e notificações
 - Nome: Consistência de comunicação e notificações

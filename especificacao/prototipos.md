@@ -56,13 +56,13 @@ Relaciona-se a RF-01, RF-10, RF-16 e RN-01, RN-08, RN-17.
 | [ ] 14:00 Workshop C       Sala 2       10 vagas              |
 +----------------------------------------------------------------+
 | Política de cancelamento: conforme configuração do evento     |
-| Pagamento prévio: conforme configuração do evento             |
+| Vaga reservada ao iniciar pagamento; boleto/Pix vencido libera vaga |
 |                                                                |
 | [Continuar inscrição]                                         |
 +----------------------------------------------------------------+
 ```
 
-Na confirmação, o sistema deve validar capacidade, conflito de horário, duplicidade, pagamento e demais regras aplicáveis. Os campos de política permanecem configuráveis por causa de DL-01, DL-06, DL-07, DL-10 e DL-12.
+Na confirmação, o sistema deve validar capacidade, conflito com inscrições em andamento/pendentes ou confirmadas, duplicidade, pagamento e demais regras aplicáveis. Se houver conflito, deve bloquear a reserva, exibir alerta explicativo e enviar notificação por e-mail, conforme RN-10/RN-21. A vaga é reservada no início do pagamento e, se boleto/Pix vencer sem confirmação, volta a ficar disponível conforme RN-07. O critério de confirmação prévia de pagamento permanece sujeito a DL-12. A mesma política de inscrição, pagamento, cancelamento e lista de espera aplica-se a todas as categorias, conforme DL-10. O prazo de cancelamento segue RN-04.
 
 ### 3.3 Minhas inscrições
 
@@ -83,7 +83,7 @@ Na confirmação, o sistema deve validar capacidade, conflito de horário, dupli
 +----------------------------------------------------------------+
 ```
 
-A ação de cancelamento só aparece quando permitida pela política do evento e pelo prazo definido. O certificado só aparece quando a condição de emissão for satisfeita.
+A ação de cancelamento só aparece quando permitida pela política do evento e até sete dias úteis antes de sua data de início, conforme RN-04. O certificado é emitido automaticamente após o evento e enviado por e-mail aos participantes com frequência mínima de 75%, conforme RN-13/RN-23; o cálculo depende do método de apuração ainda a especificar.
 
 ## 4. Módulo de Organizadores
 
@@ -93,10 +93,10 @@ A ação de cancelamento só aparece quando permitida pela política do evento e
 +----------------------------------------------------------------+
 | Painel do organizador                         [+ Novo evento]  |
 +----------------------------------------------------------------+
-| Evento                 Status      Inscritos   Vagas   Ações    |
-| Congresso Eventus      Ativo       120         80      [Abrir]  |
-| Workshop de Gestão     Rascunho    0           20      [Editar] |
-| Evento corporativo     Encerrado   200         0       [Abrir]  |
+| Evento                 Status      Confirm. Pagto. Vagas Ações  |
+| Congresso Eventus      Ativo       110      10     80    [Abrir]|
+| Workshop de Gestão     Rascunho    0        0      20    [Editar]|
+| Evento corporativo     Encerrado   200      0      0     [Abrir]|
 +----------------------------------------------------------------+
 | Indicadores: 3 eventos | 320 inscritos | 100 vagas disponíveis |
 +----------------------------------------------------------------+
@@ -121,13 +121,13 @@ Relaciona-se a RF-09, RF-10, RF-12 e RF-13.
 | Cancelamento: [Permitir v]  Prazo: [________]                 |
 | Reembolso:    [Configurar]                                    |
 | Lista espera: [Ativar v]    Pagamento prévio: [Configurar v]  |
-| Certificado:  [Automático v] Presença obrigatória: [Sim/Não]  |
+| Certificado: automático após evento; frequência mínima: 75%  |
 +----------------------------------------------------------------+
 | [Salvar rascunho]                              [Ativar evento] |
 +----------------------------------------------------------------+
 ```
 
-As opções de prazo, reembolso, pagamento, reserva de vaga, certificado e lista de espera devem aguardar as definições relacionadas às DLs correspondentes.
+Cancelamento, reembolso, pagamento e lista de espera seguem as regras de negócio correspondentes; a reserva ocorre no início do pagamento e o vencimento do boleto/Pix libera a vaga (RN-07). A emissão do certificado segue a regra fixa de frequência mínima de 75% (RN-13/RN-23); o método de registro e cálculo da frequência ainda precisa ser definido.
 
 ### 4.3 Agenda e controle de atividades
 
@@ -144,7 +144,7 @@ As opções de prazo, reembolso, pagamento, reserva de vaga, certificado e lista
 +----------------------------------------------------------------+
 ```
 
-Relaciona-se a RF-16, RN-17 e RN-24. Conflitos de horário devem ser sinalizados, sem fixar comportamento além do que for definido em DL-07.
+Relaciona-se a RF-16, RN-17 e RN-24. O bloqueio de inscrição do participante em atividade conflitante com outra inscrição em andamento/pendente ou confirmada foi definido em DL-07/RN-10; isso não determina se o organizador pode cadastrar atividades com horários sobrepostos na agenda.
 
 ### 4.4 Participantes e lista de espera
 
@@ -159,12 +159,14 @@ Relaciona-se a RF-16, RN-17 e RN-24. Conflitos de horário devem ser sinalizados
 | Joao Souza         Palestra B      Pendente     Pendente        |
 | Ana Costa          Workshop C      Espera #1    N/A             |
 +----------------------------------------------------------------+
-| Total: 120   Confirmados: 110   Pendentes: 5   Em espera: 5    |
-| [Exportar] [Convocar próximo] [Registrar presença]             |
+| Total: 120   Confirmados: 110   Pagto: 5   Em espera: 5        |
+| [Exportar] [Convocar próximo] [Presença conforme modalidade]  |
 +----------------------------------------------------------------+
 ```
 
-A ordem de convocação depende de DL-03. A exportação e os dados exibidos devem respeitar o perfil de acesso e a proteção de dados.
+A convocação deve seguir a ordem cronológica de inscrição na lista de espera, conforme RN-24 e DL-03 (resolvida). Para presença que habilita certificado, eventos online usam dados do Zoom ou Google Meet e eventos presenciais usam lista de chamada; a integração/importação e o cálculo da frequência ainda precisam ser definidos. Comprovantes de inscrições confirmadas, certificados e notificações são enviados por e-mail, conforme DL-05. A exportação e os dados exibidos devem respeitar o perfil de acesso e a proteção de dados.
+
+Vagas reservadas por pagamentos em andamento contam como ocupadas para o controle de capacidade e voltam a ficar disponíveis quando boleto ou Pix vencer sem confirmação, conforme RN-01/RN-07.
 
 ## 5. Módulo da Equipe Financeira
 
@@ -181,11 +183,12 @@ A ordem de convocação depende de DL-03. A exportação e os dados exibidos dev
 | Pedro Lima   | Workshop        | R$00,00 | Isento   | [Detalhes]  |
 | Ana Costa    | Corporativo     | R$120,00| Pago     | [Detalhes]  |
 +----------------------------------------------------------------+
-| [Confirmar pagamento] [Registrar recusa] [Ver histórico]       |
+| Status da instituição financeira: [Pendente/Confirmado/Recusado]|
+| [Ver retorno] [Tratar exceção] [Ver histórico]                 |
 +----------------------------------------------------------------+
 ```
 
-O bloqueio da inscrição por pagamento prévio deve ser aplicado apenas quando essa regra estiver configurada e definida, conforme DL-12.
+Quando a confirmação prévia for exigida, o status deve refletir o retorno da instituição financeira; somente a confirmação dessa instituição libera a inscrição. Quais inscrições exigem confirmação ainda está pendente em DL-12.
 
 ### 5.2 Reembolsos
 
@@ -198,14 +201,14 @@ O bloqueio da inscrição por pagamento prévio deve ser aplicado apenas quando 
 | REB-002           Pedro Lima   | R$00,00 | Não aplicável | [...] |
 +----------------------------------------------------------------+
 | Dados da solicitação                                           |
-| Motivo: [Cancelamento dentro do prazo]                         |
-| Política aplicada: [A confirmar por evento]                    |
+| Motivo: [Cancelamento pela organização / Saúde com atestado]   |
+| Política aplicada: [Cancelamento do evento / Atestado médico]  |
 |                                                                |
 | [Aprovar] [Recusar] [Registrar processamento]                  |
 +----------------------------------------------------------------+
 ```
 
-A elegibilidade e o prazo permanecem dependentes de DL-01 e DL-02.
+A elegibilidade para reembolso de inscrição paga está definida em RN-05: cancelamento do evento pela organização ou problema de saúde do participante comprovado por atestado médico. O valor e o prazo de processamento não foram definidos. O prazo para cancelar a inscrição está definido em RN-04.
 
 ## 6. Módulo de Palestrantes
 
@@ -216,15 +219,15 @@ A elegibilidade e o prazo permanecem dependentes de DL-01 e DL-02.
 | Área do palestrante                                            |
 +----------------------------------------------------------------+
 | Minhas atividades                                               |
-| Data       Horário  Atividade       Local       Participantes  |
-| 10/10/26   09:00    Workshop A      Sala 1      20 inscritos  |
-| 10/10/26   11:00    Palestra B       Auditório   120 inscritos |
+| Data       Atividade       Descrição       Palestrante  Valor   |
+| 10/10/26   Workshop A      ...             Ana          R$ 80   |
+| 10/10/26   Palestra B      ...             Bruno        R$ 80   |
 +----------------------------------------------------------------+
 | [Ver participantes] [Ver detalhes da atividade]               |
 +----------------------------------------------------------------+
 ```
 
-O acesso é restrito às atividades vinculadas ao palestrante. A quantidade e os dados dos participantes exibidos devem respeitar DL-08.
+O acesso é restrito às atividades vinculadas ao palestrante. Data do evento, descrição, palestrante e valor podem ser exibidos. Na lista de participantes, mostrar somente nome e sexo; CPF, RG e outros dados pessoais não especificados para esse perfil ficam ocultos, conforme DL-08/RN-16.
 
 ### 6.2 Participantes da atividade
 
@@ -232,12 +235,11 @@ O acesso é restrito às atividades vinculadas ao palestrante. A quantidade e os
 +----------------------------------------------------------------+
 | Workshop A > Participantes                                     |
 +----------------------------------------------------------------+
-| Nome              Status       Informação permitida            |
-| Maria Silva       Confirmada   Nome e status                   |
-| Joao Souza        Confirmada   Nome e status                   |
-| Ana Costa         Pendente     Nome e status                   |
+| Nome              Sexo                                         |
+| Maria Silva       Feminino                                     |
+| João Souza        Masculino                                    |
 +----------------------------------------------------------------+
-| Dados sensíveis e informações de outros eventos não exibidos.  |
+| CPF e RG não são exibidos; somente participantes da atividade. |
 +----------------------------------------------------------------+
 ```
 
@@ -266,7 +268,7 @@ Relaciona-se a RF-22, RF-23, RN-15, RN-16 e RN-19.
 +----------------------------------------------------------------+
 ```
 
-As permissões exibidas são uma proposta inicial. O conjunto definitivo de ações por perfil depende de DL-11.
+Permissões definidas: participante consulta todos os eventos e se inscreve; organizador administra eventos; palestrante consulta os eventos que irá ministrar e somente nome/sexo dos participantes dessas atividades; equipe financeira consulta pagamentos/status, trata divergências sem sobrescrever a confirmação da instituição financeira, analisa/processa reembolsos e consulta histórico financeiro/relatórios. Os controles de interface continuam ilustrativos.
 
 ## 8. Estados essenciais
 
@@ -286,4 +288,4 @@ As transições devem ser registradas no histórico de auditoria e respeitar as 
 
 ## 9. Requisitos não funcionais considerados
 
-Os protótipos devem evoluir considerando acessibilidade, navegação por teclado, contraste, responsividade, clareza das mensagens, proteção de dados, controle de acesso, desempenho, disponibilidade e auditabilidade, conforme RNF-01 a RNF-20. Os critérios concretos de segurança, desempenho, disponibilidade, acessibilidade e privacidade ainda dependem de validação em DL-09.
+Os protótipos devem evoluir considerando WCAG 2.2 nível AA como alvo de acessibilidade, além das referências de segurança OWASP ASVS, privacidade LGPD/ANPD e qualidade ISO/IEC 25010 adotadas em DL-09. Ainda faltam nível/escopo de verificação de segurança, metas e cenários de medição de desempenho/disponibilidade e políticas operacionais de dados.

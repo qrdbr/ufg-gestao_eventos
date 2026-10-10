@@ -47,22 +47,22 @@ Todos os demais IDs (RF-01 a RF-16) permanecem inalterados.
 - Nome: Inscrição em vários workshops no mesmo dia
 - Descrição: O sistema deve permitir a inscrição simultânea do participante em diferentes workshops que ocorram no mesmo dia, desde que não haja conflito de horário ou restrição do evento.
 - Prioridade: Média
-- Critério de aceite: Se dois workshops forem incompatíveis por conflito de horário, o sistema deve bloquear a segunda inscrição e informar a incompatibilidade.
+- Critério de aceite: Se um workshop conflitar com outra inscrição em andamento/pendente ou confirmada do participante, o sistema deve bloquear a nova inscrição e informar a incompatibilidade.
 - Observações: Deve existir validação para impedir que o participante se inscreva em atividades que ocorram ao mesmo tempo. Prioridade ajustada de Alta para Média (REV-12): refinamento da RF-02, baseado em fala sugestiva do participante ("gostaria de me inscrever"), não bloqueia o fluxo essencial de inscrição.
 
 #### RF-04 - Comprovante de inscrição
 - Nome: Emissão de comprovante de inscrição
 - Descrição: Após a confirmação da inscrição, o sistema deve gerar e disponibilizar um comprovante para o participante, com dados do evento, data da inscrição e status da participação.
 - Prioridade: Média
-- Critério de aceite: Após uma inscrição confirmada, o sistema deve apresentar o comprovante na interface do participante e/ou enviá-lo por e-mail.
-- Observações: O comprovante pode ser enviado por e-mail ou disponibilizado no portal do participante. Prioridade ajustada de Alta para Média (REV-12): fala do participante é sugestiva ("seria interessante"), item de conveniência que não bloqueia a confirmação da inscrição em si.
+- Critério de aceite: Após uma inscrição confirmada, o sistema deve gerar o comprovante com os dados do evento, data da inscrição e status da participação, e enviá-lo ao e-mail do participante.
+- Observações: O envio por e-mail foi definido em DL-05. Prioridade ajustada de Alta para Média (REV-12): fala do participante é sugestiva ("seria interessante"), item de conveniência que não bloqueia a confirmação da inscrição em si.
 
 #### RF-05 - Cancelamento de inscrição
 - Nome: Cancelamento de inscrição
 - Descrição: O sistema deve permitir que o participante cancele uma inscrição, sem a necessidade de contato direto com a organização, desde que a política do evento permita essa ação.
-- Prioridade: Média
-- Critério de aceite: Quando a inscrição estiver dentro do prazo permitido e o evento permitir cancelamento, o participante deve conseguir cancelar a inscrição e receber confirmação do sistema.
-- Observações: O cancelamento deve seguir regras específicas de prazo, condições do evento e possíveis reembolsos. Prioridade ajustada de Alta para Média (REV-15): critério de aceite depende do prazo definido em DL-01, ainda aberta — aplicando de forma consistente o mesmo critério de dependência já usado para rebaixar RF-11.
+- Prioridade: Alta
+- Critério de aceite: Quando o evento permitir cancelamento e faltarem pelo menos sete dias úteis para sua data de início, o participante deve conseguir cancelar a inscrição e receber confirmação do sistema. Com menos de sete dias úteis restantes, o sistema deve bloquear a ação e informar o prazo aplicável.
+- Observações: O prazo foi definido em DL-01 e registrado em RN-04. A elegibilidade para reembolso é tratada separadamente em RF-20 e RN-05.
 
 #### RF-06 - Acompanhamento do status da inscrição
 - Nome: Acompanhamento do status da inscrição
@@ -73,17 +73,17 @@ Todos os demais IDs (RF-01 a RF-16) permanecem inalterados.
 
 #### RF-07 - Emissão de certificado
 - Nome: Emissão de certificado
-- Descrição: O sistema deve permitir a emissão de certificado para o participante após a realização do evento ou atividade, conforme regras estabelecidas pela organização.
-- Prioridade: Média
-- Critério de aceite: Após o evento ou quando a regra de presença for atendida, o participante deve conseguir acessar e baixar seu certificado.
-- Observações: A emissão pode depender da confirmação de presença ou de outros critérios definidos pelo evento. Prioridade ajustada de Alta para Média (REV-15): critério de aceite depende da regra de presença/emissão definida em DL-04, ainda aberta — aplicando de forma consistente o mesmo critério de dependência já usado para rebaixar RF-11.
+- Descrição: O sistema deve emitir automaticamente certificado após a conclusão do evento para cada participante com frequência registrada igual ou superior a 75%.
+- Prioridade: Alta
+- Critério de aceite: Após a conclusão do evento, participantes com frequência registrada de pelo menos 75% devem ter o certificado gerado e enviado por e-mail; participantes abaixo desse limite não devem recebê-lo.
+- Observações: A política e as fontes de presença foram definidas em DL-04 e registradas em RN-13/RN-23: Zoom ou Google Meet para eventos online; lista de chamada para presenciais. A base de cálculo, o procedimento de registro presencial e o mecanismo de obtenção dos dados das plataformas ainda precisam ser especificados antes da implementação.
 
 #### RF-08 - Notificações e comprovantes
 - Nome: Envio de comprovantes e notificações
-- Descrição: O sistema deve enviar comprovantes de inscrição, confirmações, cancelamentos, lembretes e demais notificações aos participantes por meio dos canais definidos pela organização.
-- Prioridade: Baixa
-- Critério de aceite: Sempre que houver uma mudança relevante no processo de inscrição, o participante deve receber notificação por e-mail ou outro canal informado.
-- Observações: E-mail, mensagens diretas ou portal do participante podem ser utilizados conforme a estratégia da empresa. Prioridade ajustada de Alta para Baixa (REV-12): não há fala direta de stakeholder solicitando notificações; o canal de envio depende de DL-05, ainda aberta, o que naturalmente empurra este item para uma fase posterior.
+- Descrição: O sistema deve enviar por e-mail comprovantes de inscrições confirmadas e notificações de confirmação, cancelamento, lista de espera, pagamento, lembretes e demais eventos relevantes ao participante.
+- Prioridade: Média
+- Critério de aceite: Sempre que ocorrer uma mudança relevante no processo de inscrição, o sistema deve enviar a notificação ao endereço de e-mail do participante.
+- Observações: O envio de comprovantes, certificados e notificações por e-mail foi definido em DL-05. A prioridade é Média por se tratar de suporte aos fluxos principais.
 
 ### 2. Módulo de Organizadores
 
@@ -96,23 +96,23 @@ Todos os demais IDs (RF-01 a RF-16) permanecem inalterados.
 
 #### RF-10 - Controle automático de vagas
 - Nome: Controle automático de vagas
-- Descrição: O sistema deve controlar automaticamente a quantidade de vagas disponíveis de cada evento e impedir novas inscrições quando a capacidade for atingida.
+- Descrição: O sistema deve controlar automaticamente a quantidade de vagas disponíveis de cada evento, considerando participantes confirmados e vagas reservadas por pagamentos em andamento, e impedir novas reservas quando a capacidade estiver comprometida.
 - Prioridade: Alta
-- Critério de aceite: Quando o número de inscrições atingir o limite do evento, o sistema deve impedir novas inscrições confirmadas e exibir a situação de lotado.
+- Critério de aceite: Quando todas as vagas estiverem confirmadas ou reservadas por pagamentos em andamento, o sistema deve impedir novas reservas e exibir a situação de lotado; vagas reservadas devem voltar a ficar disponíveis após o vencimento do boleto ou Pix sem confirmação.
 - Observações: A regra deve considerar vagas totais e vagas remanescentes por atividade.
 
 #### RF-11 - Lista de espera
 - Nome: Gestão de lista de espera
 - Descrição: Quando um evento atingir a capacidade máxima, o sistema deve permitir a criação de uma lista de espera para participantes interessados em ocupar vagas disponíveis posteriormente.
 - Prioridade: Média
-- Critério de aceite: Quando houver lotação, o sistema deve aceitar inscrições em lista de espera e, ao surgirem vagas, notificar o próximo participante em ordem.
-- Observações: O sistema deve permitir a movimentação automática entre lista de espera e participantes confirmados. Prioridade ajustada de Alta para Média (REV-12): fala do organizador é sugestiva ("seria interessante"), e a regra de ordenação ainda depende de DL-03, em aberto.
+- Critério de aceite: Quando houver lotação e a lista de espera estiver habilitada, o sistema deve aceitar inscrições em espera e, ao surgir vaga, priorizar para convocação o participante que se inscreveu primeiro na lista; a notificação de convocação deve ser enviada por e-mail.
+- Observações: Os participantes devem ser convocados em ordem cronológica de inscrição, conforme DL-03 e RN-24. A prioridade permanece Média porque a solicitação original do organizador foi sugestiva ("seria interessante").
 
 #### RF-12 - Acompanhamento de inscritos em tempo real
 - Nome: Acompanhamento de inscritos em tempo real
-- Descrição: O sistema deve disponibilizar para os organizadores o número atual de inscritos em cada evento, atualizado em tempo real.
+- Descrição: O sistema deve disponibilizar para os organizadores o número atual de inscritos e de vagas reservadas por pagamentos em andamento em cada evento, atualizado em tempo real.
 - Prioridade: Média
-- Critério de aceite: A dashboard do organizador deve refletir o total de inscritos e vagas disponíveis em tempo real após cada inscrição, cancelamento ou confirmação.
+- Critério de aceite: A dashboard do organizador deve refletir inscrições confirmadas, vagas reservadas por pagamentos em andamento e vagas disponíveis após inscrições, cancelamentos, confirmações e vencimentos de boleto/Pix.
 - Observações: Este acompanhamento deve permitir visão geral do evento e apoio à tomada de decisão. Prioridade ajustada de Alta para Média (REV-12): fala do organizador é sugestiva ("Gostaríamos"), é uma melhoria de gestão sobre a RF-10, não uma trava operacional em si.
 
 #### RF-13 - Gestão de participantes por evento
@@ -131,10 +131,10 @@ Todos os demais IDs (RF-01 a RF-16) permanecem inalterados.
 
 #### RF-15 - Tratamento de conflitos de horário
 - Nome: Tratamento de conflitos de horário
-- Descrição: O sistema deve evitar que o participante se inscreva em atividades que ocorram simultaneamente, caso essa restrição seja aplicável.
-- Prioridade: Média
-- Critério de aceite: Ao tentar cadastrar uma atividade em horário coincidente com outra já inscrita, o sistema deve bloquear a ação e exibir mensagem de conflito.
-- Observações: A validação deve ocorrer antes da confirmação da inscrição. Prioridade ajustada de Alta para Média (REV-15): a política exata de conflito para eventos com múltiplas inscrições simultâneas depende de DL-07, ainda aberta — aplicando de forma consistente o mesmo critério de dependência já usado para rebaixar RF-11.
+- Descrição: O sistema deve impedir que o participante reserve vaga em atividade com horário conflitante com outra inscrição sua em andamento/pendente ou confirmada.
+- Prioridade: Alta
+- Critério de aceite: Antes de reservar vaga ou confirmar a inscrição, o sistema deve detectar a sobreposição, impedir a nova reserva/inscrição, exibir alerta explicativo e enviar notificação por e-mail ao participante.
+- Observações: A política foi definida em DL-07 e registrada em RN-10/RN-21. A validação deve ocorrer também no momento da reserva para evitar que inscrições iniciadas concorrentemente contornem o bloqueio.
 
 #### RF-16 - Controle de atividades por agenda
 - Nome: Controle de agenda de atividades
@@ -143,70 +143,69 @@ Todos os demais IDs (RF-01 a RF-16) permanecem inalterados.
 - Critério de aceite: O organizador deve ser capaz de inserir as atividades de um evento com horário, local e responsável, e visualizar a agenda montada.
 - Observações: A agenda deve facilitar o planejamento do evento e a organização das inscrições.
 
-#### RF-17 - Emissão de certificados automática ou condicionada
-- Nome: Emissão de certificados automática ou condicionada
-- Descrição: O sistema deve permitir que a emissão do certificado seja configurada para ocorrer automaticamente ou somente após a confirmação de presença ou outra validação estabelecida.
+#### RF-17 - Processamento automático da emissão de certificados
+- Nome: Processamento automático da emissão de certificados
+- Descrição: O sistema deve processar automaticamente a emissão dos certificados após a conclusão do evento para participantes que atendam à frequência mínima de 75%.
 - Prioridade: Média
-- Critério de aceite: O organizador deve poder configurar, por evento, se a emissão do certificado será automática ou condicionada a critérios específicos, como presença confirmada.
-- Observações: Essa regra deve ser definida por evento ou tipo de atividade.
+- Critério de aceite: Ao concluir o evento, o sistema deve verificar a frequência registrada e gerar o certificado para participantes com frequência igual ou superior a 75%, sem exigir liberação manual do organizador.
+- Observações: A emissão automática, o limite de 75% e as fontes de presença por modalidade foram definidos em DL-04. A base de cálculo, o procedimento para lista presencial e o mecanismo para obter dados do Zoom/Google Meet ainda devem ser especificados.
 
 ### 3. Módulo de Equipe Financeira
 
 #### RF-18 - Pagamento de inscrições
 - Nome: Processamento de pagamento
-- Descrição: O sistema deve permitir a diferenciação entre eventos gratuitos e pagos, com registro do status do pagamento e bloqueio da inscrição até a confirmação da transação quando necessário.
+- Descrição: O sistema deve permitir a diferenciação entre eventos gratuitos e pagos, registrar o status do pagamento e, quando a confirmação prévia for exigida, liberar a inscrição somente após confirmação pela instituição financeira.
 - Prioridade: Média
 - Critério de aceite: Para eventos gratuitos, a inscrição pode ser validada imediatamente. Para eventos pagos, a inscrição deve ficar pendente até a confirmação do pagamento **apenas quando essa exigência estiver configurada para o evento/inscrição em questão**, e não para todo evento pago de forma automática.
-- Observações: A Equipe Financeira indicou a exigência de confirmação prévia para "determinadas inscrições", não para todo evento pago — a regra deve ser configurável por evento, alinhada com RN-06. O critério exato que define quais inscrições se enquadram nessa exigência é objeto de [DL-12](duvidas-e-lacunas.md#L97-L103).
-- Status: Bloqueado por DL-12 (critério de exigência de confirmação prévia de pagamento) — o critério de aceite acima descreve a configurabilidade, mas não o critério em si, até essa dúvida ser respondida pelos stakeholders. Prioridade ajustada de Alta para Média (REV-15): aplicando de forma consistente o mesmo critério de dependência de dúvida aberta já usado para rebaixar RF-11.
+- Observações: A instituição financeira é a fonte de confirmação quando o pagamento prévio for exigido. Ainda não foi definido quais inscrições se enquadram nessa exigência; esse critério é objeto de [DL-12](duvidas-e-lacunas.md#L123-L130).
+- Status: Parcialmente bloqueado por DL-12 — fonte de confirmação definida; critério de aplicabilidade pendente. Prioridade ajustada de Alta para Média (REV-15): aplicando de forma consistente o mesmo critério de dependência de dúvida aberta já usado para rebaixar RF-11.
 
 #### RF-19 - Confirmação de pagamento antes da liberação da inscrição
 - Nome: Confirmação de pagamento antes da liberação da inscrição
 - Descrição: O sistema deve impedir que a inscrição seja considerada válida antes da confirmação do pagamento, quando essa regra for exigida para a inscrição/evento em questão — não como padrão universal para todo evento pago.
 - Prioridade: Média
-- Critério de aceite: Quando a inscrição estiver entre as "determinadas" que exigem pagamento prévio (conforme configuração do evento), ela só deve ser liberada após a confirmação do pagamento no sistema; demais inscrições pagas seguem o fluxo padrão de confirmação.
-- Observações: Isso é especialmente relevante em eventos com taxa de inscrição ou vagas exclusivas. O critério que define quais inscrições se enquadram nessa exigência é objeto de [DL-12](duvidas-e-lacunas.md#L97-L103).
-- Status: Bloqueado por DL-12 (critério de exigência de confirmação prévia de pagamento) — o critério de aceite acima descreve a configurabilidade, mas não o critério em si, até essa dúvida ser respondida pelos stakeholders. Prioridade ajustada de Alta para Média (REV-15): aplicando de forma consistente o mesmo critério de dependência de dúvida aberta já usado para rebaixar RF-11.
+- Critério de aceite: Quando a inscrição estiver entre as que exigem pagamento prévio, ela só deve ser liberada após a instituição financeira confirmar o pagamento; o critério que identifica essas inscrições permanece pendente.
+- Observações: A confirmação da instituição financeira é a fonte de verdade do pagamento. O critério que define quais inscrições exigem essa confirmação é objeto de [DL-12](duvidas-e-lacunas.md#L123-L130).
+- Status: Parcialmente bloqueado por DL-12 — fonte de confirmação definida; critério de aplicabilidade pendente. Prioridade ajustada de Alta para Média (REV-15): aplicando de forma consistente o mesmo critério de dependência de dúvida aberta já usado para rebaixar RF-11.
 
 #### RF-20 - Reembolso da inscrição
 - Nome: Reembolso da inscrição
 - Descrição: O sistema deve suportar a definição de regras de reembolso e a execução do reembolso quando a situação do participante ou do evento enquadrar nas condições estabelecidas.
-- Prioridade: Média
-- Critério de aceite: Caso a regra de reembolso seja aplicável, o sistema deve registrar a solicitação, validar a elegibilidade e gerar o processo de reembolso.
-- Observações: As regras devem ser configuráveis e depender do tipo de evento e da política da organização. Prioridade ajustada de Alta para Média (REV-15): critérios de elegibilidade dependem de DL-02, ainda aberta — aplicando de forma consistente o mesmo critério de dependência já usado para rebaixar RF-11.
+- Prioridade: Alta
+- Critério de aceite: Para uma inscrição paga, o sistema deve permitir registrar solicitação de reembolso quando a organização cancelar o evento ou quando o participante apresentar atestado médico que comprove problema de saúde; a solicitação e o motivo devem ficar disponíveis para análise e processamento pela equipe financeira. Eventos gratuitos não devem gerar reembolso de valor de inscrição.
+- Observações: Os critérios de elegibilidade foram definidos em DL-02 e registrados em RN-05. O valor (integral ou parcial) e o prazo de processamento não foram definidos e não devem ser presumidos. O atestado contém dado de saúde; seu tratamento e acesso devem respeitar os requisitos de privacidade e permissões, ainda pendentes de validação em DL-09 e DL-11.
 
 #### RF-21 - Reserva de vaga no pagamento
 - Nome: Reserva de vaga durante o processo de pagamento
-- Descrição: O sistema deve definir quando a vaga será reservada: no início do pagamento ou somente após a confirmação final da transação.
-- Prioridade: Média
-- Critério de aceite: O sistema deve manter uma regra consistente de reserva de vaga, evitando sobreposição de inscrições para o mesmo evento.
-- Observações: Essa regra deve ser consistente para evitar conflitos entre participantes e sobreposição de vagas.
-- Status: Bloqueado por DL-06 (momento da reserva de vaga) — o critério de aceite acima não é verificável até essa dúvida ser respondida pelos stakeholders.
+- Descrição: O sistema deve reservar a vaga no início do processo de pagamento e liberá-la quando um boleto ou Pix vencer sem confirmação.
+- Prioridade: Alta
+- Critério de aceite: Ao iniciar o pagamento, a vaga deve deixar de estar disponível para outras inscrições. Se o boleto ou Pix vencer sem confirmação, a vaga deve voltar a ficar disponível ou ser destinada ao próximo participante da lista de espera, respeitando RN-24.
+- Observações: A regra foi definida em DL-06 e registrada em RN-07. O sistema depende da informação de vencimento do meio de pagamento; o tratamento de outras falhas de pagamento não foi especificado.
 
 ### 4. Módulo de Palestrantes
 
 #### RF-22 - Consulta de programação para palestrantes
 - Nome: Consulta da programação dos palestrantes
-- Descrição: O sistema deve permitir que os palestrantes consultem a programação de suas atividades, incluindo data, horário, local, tema e participantes relacionados.
+- Descrição: O sistema deve permitir que os palestrantes consultem a programação de suas atividades e os dados do evento definidos para esse perfil: data do evento, descrição, palestrante e valor do evento.
 - Prioridade: Média
 - Critério de aceite: Um palestrante autenticado deve conseguir visualizar sua agenda de atividades no sistema e confirmar o horário e o local de cada apresentação.
-- Observações: A exibição deve respeitar os limites de informação definidos pela organização.
+- Observações: A exibição deve respeitar RN-15. Para participantes das próprias atividades, somente nome e sexo são visíveis; CPF, RG e outros dados pessoais não especificados ficam ocultos, conforme DL-08/RN-16.
 
 #### RF-23 - Consulta de participantes inscritos por atividade
 - Nome: Consulta de participantes por atividade
 - Descrição: Os palestrantes devem ser capazes de consultar a lista de participantes inscritos nas atividades em que atuam, respeitando as regras de privacidade e acesso.
 - Prioridade: Média
-- Critério de aceite: O palestrante deve conseguir visualizar somente os participantes vinculados à sua atividade e não informações de outros eventos ou públicos.
-- Observações: A informação disponibilizada deve ser limitada ao necessário para a atividade do palestrante.
+- Critério de aceite: O palestrante deve conseguir visualizar somente nome e sexo dos participantes vinculados às suas atividades; CPF, RG e outros dados pessoais não especificados devem permanecer ocultos, assim como participantes de outros eventos ou atividades.
+- Observações: O conjunto mínimo de dados visível foi definido em DL-08 e registrado em RN-16.
 
 ### 5. Módulo Gestão de Acessos
 
 #### RF-24 - Gestão de acesso por perfil de usuário
 - Nome: Gestão de acesso por perfil de usuário
-- Descrição: O sistema deve distinguir os acessos de participantes, organizadores, equipe financeira e palestrantes, garantindo que cada perfil visualize apenas as informações relevantes ao seu papel.
+- Descrição: O sistema deve distinguir os acessos por perfil: participantes podem visualizar todos os eventos e se inscrever; organizadores podem administrar eventos; palestrantes podem visualizar eventos que irão ministrar e nome/sexo dos participantes dessas atividades; equipe financeira pode consultar pagamentos/status, tratar divergências, analisar/processar reembolsos e consultar histórico financeiro/relatórios.
 - Prioridade: Alta
-- Critério de aceite: Usuários com perfis diferentes devem receber telas, permissões e ações conforme seu papel, sem acesso indevido a dados de outros perfis.
-- Observações: A autenticação e autorização devem garantir segurança e separação de responsabilidades.
+- Critério de aceite: Cada perfil consegue executar somente as ações definidas para ele; participante consulta eventos e se inscreve, organizador administra eventos, palestrante consulta seus eventos e nome/sexo dos participantes vinculados, e equipe financeira consulta pagamentos/status, trata divergências, processa reembolsos e consulta histórico/relatórios. A equipe financeira não pode sobrescrever a confirmação oficial da instituição financeira.
+- Observações: As permissões por perfil foram definidas em DL-11/RN-19; os dados visíveis aos palestrantes seguem DL-08/RN-16.
 
 ## Resumo
 
